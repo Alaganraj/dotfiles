@@ -1,6 +1,7 @@
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
+alias .....="cd ../../../.."
 
 alias c='clear'
 alias cp='cp -iv'
@@ -8,6 +9,8 @@ alias cp='cp -iv'
 # Bookmarks
 alias dl='cd ~/Downloads && ls -lA'
 alias doc='cd ~/Documents && ls -lA'
+
+alias dfh='df -h'
 
 alias ea="vim ~/.alias"
 
@@ -27,6 +30,9 @@ alias gb='git branch'
 alias gba='git branch --all'
 alias gbd='git branch --delete'
 alias gbD='git branch --delete --force'
+
+#delete remote branch
+alias gbdr='git push origin --delete'
 alias gbl='git blame -b -w'
 alias gbnm='git branch --no-merged'
 alias gbr='git branch --remote'
@@ -44,8 +50,12 @@ alias gd='git diff'
 alias gdc='git diff --cached'
 alias gds='git diff --staged'
 
-alias gpull='git pull'
-alias glg='git log --stat'
+alias ghf='git log -p --'
+
+alias gpl='git pull'
+alias gl='git log'
+alias gls='git log --stat'
+alias glog='git log'
 alias glgp='git log --stat --patch'
 alias glgg='git log --graph'
 alias glgga='git log --graph --decorate --all'
@@ -56,24 +66,28 @@ alias glols="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgr
 alias glod="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'"
 alias glods="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short"
 alias glola="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all"
-alias glog='git log --oneline --decorate --graph'
+alias glogg='git log --oneline --decorate --graph'
 alias gloga='git log --oneline --decorate --graph --all'
 
 alias gm='git merge'
+alias gms='git merge --squash'
 
-alias gp='git push'
-alias gpd='git push --dry-run'
-alias gpu='git push upstream'
+alias gph='git push'
+alias gphd='git push --dry-run'
+alias gphu='git push upstream'
 
-alias gr='git remote'
+alias gr='git remote -v show'
 alias gra='git remote add'
 alias grb='git rebase'
 alias grba='git rebase --abort'
 alias grbc='git rebase --continue'
-alias grst='git restore --staged'
+alias grst='git restore'
+alias grsts='git restore --staged'
 
-
-alias gst="git status"
+alias gs="git status; gb"
+alias gshow="git show"
+alias gsm="git submodule update --init --recursive" #raj
+alias gsmcl="git submodule deinit -f ."  # revert changes
 ##########################
 #	/Git
 ##########################
@@ -84,7 +98,7 @@ alias i='sudo apt install'
 
 alias la='ls -A'
 alias l='ls -CF'
-alias ll='ls -alF'
+alias ll='ls -alFh'
 alias lt='ls -lt'
 alias ld='ls -l | grep "^d"'
 
@@ -118,3 +132,10 @@ function dud {
   du -d $1 -h
 }
 
+function lp {
+  while true; do $1; $2; $3; $4; sleep 1; echo "--------------------"; done
+}
+
+function gfp {
+	git format-patch -$1 HEAD
+}
