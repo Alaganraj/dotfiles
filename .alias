@@ -3,6 +3,8 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
+alias bblr="bitbake-layers show-recipes" # list recipes
+
 alias c='clear'
 alias cp='cp -iv'
 
@@ -13,7 +15,7 @@ alias doc='cd ~/Documents && ls -lA'
 alias dfh='df -h'
 
 alias ea="vim ~/.alias"
-
+alias ev="vim ~/.vimrc"
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 
@@ -24,6 +26,7 @@ alias g='git'
 
 alias ga='git add -u'
 alias gaa='git add --all'
+alias gan='git add'
 alias gap='git apply'
 
 alias gb='git branch'
@@ -86,9 +89,18 @@ alias grst='git restore'
 alias grsts='git restore --staged'
 
 alias gs="git status; gb"
-alias gshow="git show"
+alias gsh="git show"
 alias gsm="git submodule update --init --recursive" #raj
 alias gsmcl="git submodule deinit -f ."  # revert changes
+alias gsta="git stash"
+alias gstal="git stash list"
+alias gstap="git stash pop"
+
+alias gt="git tag"
+alias gtl="git tag -l"
+alias gtr="git push origin" # push single tag
+alias gtd="git tag -d" # delete local tag
+alias gtdr="git push --delete origin" # delete tag in remote branch
 ##########################
 #	/Git
 ##########################
@@ -139,4 +151,8 @@ function lp {
 
 function gfp {
 	git format-patch -$1 HEAD
+}
+
+function ha {
+	cat ~/.alias | grep $1
 }
