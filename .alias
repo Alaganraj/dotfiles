@@ -3,8 +3,14 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
+##########################
+#	awk
+##########################
+#alias ap="awk '{print $1}'"
+
 alias bblr="bitbake-layers show-recipes" # list recipes
 
+alias s="source ~/.bashrc"
 alias c='clear'
 alias cp='cp -iv'
 
@@ -16,7 +22,7 @@ alias dfh='df -h'
 
 alias ea="vim ~/.alias"
 alias ev="vim ~/.vimrc"
-alias fd='find . -type d -name'
+alias fdir='find . -type d -name'
 alias ff='find . -type f -name'
 
 ##########################
@@ -31,6 +37,7 @@ alias gap='git apply'
 
 alias gb='git branch'
 alias gba='git branch --all'
+alias gbag='git branch --all | grep '
 alias gbd='git branch --delete'
 alias gbD='git branch --delete --force'
 
@@ -82,14 +89,16 @@ alias gphu='git push upstream'
 
 alias gr='git remote -v show'
 alias gra='git remote add'
-alias grb='git rebase'
+alias grb='git rebase -i'
 alias grba='git rebase --abort'
 alias grbc='git rebase --continue'
 alias grst='git restore'
 alias grsts='git restore --staged'
 
 alias gs="git status; gb"
+alias gst="git status"
 alias gsh="git show"
+alias gshno='git show --pretty="" --name-only'
 alias gsm="git submodule update --init --recursive" #raj
 alias gsmcl="git submodule deinit -f ."  # revert changes
 alias gsta="git stash"
@@ -121,6 +130,10 @@ alias md="md5sum"
 alias mv='mv -iv'
 
 alias npp="/snap/bin/notepad-plus-plus"
+
+#screen
+alias scl="screen -ls"
+alias scr="screen -r"
 
 alias speedtest="wget -O /dev/null http://speed.transip.nl/100mb.bin"
 alias s="source ~/.bashrc"
@@ -155,4 +168,8 @@ function gfp {
 
 function ha {
 	cat ~/.alias | grep $1
+}
+
+function ffg {
+	find . -name $1 | xargs ag $2
 }
