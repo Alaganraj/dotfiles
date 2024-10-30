@@ -9,6 +9,7 @@ alias .....="cd ../../../.."
 #alias ap="awk '{print $1}'"
 
 alias bblr="bitbake-layers show-recipes" # list recipes
+alias bw="bitwise"
 
 alias s="source ~/.bashrc"
 alias c='clear'
@@ -34,6 +35,12 @@ alias ga='git add -u'
 alias gaa='git add --all'
 alias gan='git add'
 alias gap='git apply'
+alias gac='git apply --check'
+alias gam='git am'
+alias gamr='git am -s --reject'
+alias gams='git am -s'
+alias gamsr='git am -s --reject'
+
 
 alias gb='git branch'
 alias gba='git branch --all'
@@ -49,6 +56,7 @@ alias gbr='git branch --remote'
 
 alias gc='git commit --verbose'
 alias gc!='git commit --verbose --amend'
+alias gcs='git commit --verbose -s'
 alias gcob='git checkout -b'
 alias gcf='git config'
 alias gcfl='git config --list'
@@ -56,6 +64,9 @@ alias gcfl='git config --list'
 alias gcl='git clone --recurse-submodules'
 alias gclean='git clean --interactive -d'
 alias gco='git checkout'
+
+alias gcp='git cherry-pick'
+alias gcpc='git cherry-pick --continue'
 
 alias gd='git diff'
 alias gdc='git diff --cached'
