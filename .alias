@@ -37,6 +37,7 @@ alias gan='git add'
 alias gap='git apply'
 alias gac='git apply --check'
 alias gam='git am'
+alias gamc='git am --continue'
 alias gamr='git am -s --reject'
 alias gams='git am -s'
 alias gamsr='git am -s --reject'
@@ -183,4 +184,9 @@ function ha {
 
 function ffg {
 	find . -name $1 | xargs ag $2
+}
+
+function bbPrintEnv {
+	#bitbake -e <recipe> | grep ^<variable>
+	bitbake -e $1 | grep ^$2
 }
