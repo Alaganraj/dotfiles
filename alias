@@ -2,12 +2,12 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-
+alias uv="cat /etc/lsb-release"
+alias vd="vimdiff"
 ##########################
 #	awk
 ##########################
 #alias ap="awk '{print $1}'"
-
 alias bblr="bitbake-layers show-recipes" # list recipes
 alias bw="bitwise"
 
@@ -24,7 +24,6 @@ alias dfh='df -h'
 alias ea="vim ~/.alias"
 alias ev="vim ~/.vimrc"
 alias fdir='find . -type d -name'
-alias ff='find . -type f -name'
 
 ##########################
 #	Git
@@ -38,6 +37,7 @@ alias gap='git apply'
 alias gac='git apply --check'
 alias gam='git am'
 alias gamc='git am --continue'
+alias gamS='git am --skip'
 alias gamr='git am -s --reject'
 alias gams='git am -s'
 alias gamsr='git am -s --reject'
@@ -68,6 +68,10 @@ alias gco='git checkout'
 
 alias gcp='git cherry-pick'
 alias gcpc='git cherry-pick --continue'
+
+alias gclr='git clean -f'
+
+alias gcount='git rev-list --count HEAD'
 
 alias gd='git diff'
 alias gdc='git diff --cached'
@@ -189,4 +193,67 @@ function ffg {
 function bbPrintEnv {
 	#bitbake -e <recipe> | grep ^<variable>
 	bitbake -e $1 | grep ^$2
+}
+
+function ff {
+	find . -name $1
+}
+
+function cve {
+    rm /tmp/file.patch
+    rm /tmp/log /tmp/log.append
+    rm /tmp/log
+    curl $2 > /tmp/file.patch 
+    echo "" > /tmp/log.append
+    echo "CVE: $1" >>/tmp/log.append 
+    echo "Upstream-Status: Backport [$2]" >>/tmp/log.append 
+    git am --reject /tmp/file.patch && (
+        git log -1 --pretty=format:%s > /tmp/log
+	echo "" >> /tmp/log
+	echo "" >> /tmp/log
+        git log -1 --pretty=format:%b >> /tmp/log
+        cat /tmp/log.append >> /tmp/log
+        git commit --amend -m "$(cat /tmp/log)" --signoff
+    ) || (
+        for f in $(find -name *.rej); do
+            vim -O $f ${f/.rej/}
+        done
+    )
+}
+
+function cvec {
+	ga
+	gamc
+        git log -1 --pretty=format:%s > /tmp/log
+	echo "" >> /tmp/log
+	echo "" >> /tmp/log
+        git log -1 --pretty=format:%b >> /tmp/log
+        cat /tmp/log.append >> /tmp/log
+        git commit --amend -m "$(cat /tmp/log)" --signoff
+	gclr
+	gs
+}
+function clr {
+	gamS
+	grst .
+	gclr
+	rm /tmp/file.patch
+	rm /tmp/log /tmp/log.append
+	rm /tmp/log
+	gs
+}
+
+function t {
+    rm /tmp/file.patch
+    rm /tmp/log /tmp/log.append
+    curl $2 > /tmp/file.patch 
+    echo "" > /tmp/log.append
+    echo "CVE: $1" >>/tmp/log.append 
+    echo "Upstream-Status: Backport $2" >>/tmp/log.append 
+}
+
+function bb_clean_build {
+	bitbake -f -c cleanall $@
+	bitbake $@
+
 }
